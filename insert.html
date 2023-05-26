@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style copy 3.css">
+    <title>INSERT</title>
+</head>
+<body>
+    <h1>Insert the Book</h1>
+        <div id="d">
+            <form>
+                Book ID: <input type="text" id="bookid"><br>
+                Book Title : <input type="text" id="booktitle" value><br>
+                Publisher Name : <input type="text" id="publishername"><br>
+                Cateory : <input type="text" id="category"><br>
+                Price : <input type="text" id="price"><br>
+                <input type="button" value="INSERT" id="btn">
+                <br><br><br>
+                <h3 id="res"></h3>
+            </form>
+        </div>
+
+        <script>
+            const insert = document.getElementById('btn');
+            const bookid = document.getElementById('bookid');
+            const booktitle = document.getElementById('booktitle');
+            const publishername = document.getElementById('publishername');
+            const category = document.getElementById('category');
+            const price = document.getElementById('price');
+            const result = document.getElementById('res');
+
+            insert.addEventListener('click',()=> {
+                var data = {
+                    bookid : Number(bookid.value), 
+                    booktitle : booktitle.value,
+                    publishername : publishername.value ,
+                    category : category.value,  
+                    price : Number(price.value)
+                };
+                console.log(data);
+                fetch('https://backend-t2hg.onrender.com/api/books',{
+                    method : "POST",
+                    headers : {
+                        'Content-type' : 'application/json; charset=UTF-8'
+                    },
+                    body : JSON.stringify(data)
+                 }).then(res=>{return res.json()})
+                    .then(res=>{result.innerText=JSON.stringify(res)})
+
+            })
+            
+
+        </script>
+</body>
+
+</html>

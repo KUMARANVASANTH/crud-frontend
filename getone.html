@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style copy.css">
+    <title>GETONE</title>
+</head>
+<body>
+    <h1>Get a Book by Book Title</h1>
+    <div id="d">
+        <form action="">
+            Book Title:
+            <input type="text" id="btit">
+            <input type="button" value="Get one" id="getone">
+        </form>
+        <p id="res"></p>
+    </div>
+    <script>
+        const btit = document.getElementById('btit');
+        const getone = document.getElementById('getone');
+        const result = document.getElementById('res');
+        getone.addEventListener('click',()=>{
+            fetch(`https://backend-t2hg.onrender.com/api/books/${btit.value}`)
+            .then(res => {return res.json()})
+            .then(res => {result.innerText=JSON.stringify(res)})
+        })
+    </script>
+</body>
+</html>

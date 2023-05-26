@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style copy 2.css">
+    <title>GETALL</title>
+    <style>
+        td,
+        th {
+          border: 1px solid #999;
+          padding: 1px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Getall The Books</h1>
+    <div id="d">
+        <form action="">
+            <input type="button" value="getall" id="getall">
+        </form>
+        <table id="res"></table>
+    </div>
+    <script>
+        const getall = document.getElementById('getall');
+        const result = document.getElementById('res');
+        getall.addEventListener('click',()=>{
+            fetch('https://backend-t2hg.onrender.com/api/books')
+            .then(res => {return res.json()})
+            .then(res => {res.sort((a, b)=>{
+                    return a.bookid - b.bookid;
+                        });
+                        let li = `<tr><th>bookid</th><th>booktitle</th><th>publishername</th> <th>catagory</th><th>price</th></tr>`;
+                        res.forEach((book) => {
+                         li += `<tr>
+                        <td>${book.bookid}</td>
+                        <td>${book.booktitle} </td>
+                        <td>${book.publishername}</td>
+                        <td>${book.category}</td>
+                        <td>${book.price}</td>
+                    </tr>`;
+                });
+                        result.innerHTML=li;
+                    })})
+    </script>
+</body>
+</html>
